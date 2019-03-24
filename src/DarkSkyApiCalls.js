@@ -18,7 +18,6 @@ export const getForecastFromPos = (pos) => {
     .then(json => {
       return json.daily.data.map((day, i) => {
         const date = new Date(day.time * 1000);
-        console.log(day.icon)
         return {
           weekday: date.getDay(),
           month: date.getMonth(),
