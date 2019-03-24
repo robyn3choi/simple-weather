@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { getCurrentWeatherFromPos, getForecastFromPos } from './DarkSkyApiCalls';
 import CurrentWeather from './CurrentWeather/CurrentWeather';
 import ForecastDay from './Forecast/ForecastDay';
+import SearchBar from './SearchBar/SearchBar';
 
 class App extends Component {
   state = {
@@ -19,8 +19,16 @@ class App extends Component {
 
   setLocation(pos) {
     this.setState({ location: pos });
-    getCurrentWeatherFromPos(pos).then(data => this.setState({ currentWeatherData: data }));
-    getForecastFromPos(pos).then(data => this.setState({ forecastData: data }));
+
+    fetch(`http://localhost:8081/currentweather?lat=${pos.coords.latitude}&long=${pos.coords.longitude}`)
+      .then(response => response.json())
+      .then(data => this.setState({ currentWeatherData: data }))
+      .catch(err => console.log(err));
+
+    fetch(`http://localhost:8081/forecast?lat=${pos.coords.latitude}&long=${pos.coords.longitude}`)
+      .then(response => response.json())
+      .then(data => this.setState({ forecastData: data }))
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -30,13 +38,14 @@ class App extends Component {
       );
       return (
         <div className='app'>
+          <SearchBar />
           <CurrentWeather data={this.state.currentWeatherData} />
           <div className='forecast'>{forecastDays}</div>
           <div className='dark-sky-attribution'>
             Powered by <a href='https://darksky.net/poweredby/'>Dark Sky</a>
           </div>
           <div className='icons-attribution'>
-            Icons by <a href='https://github.com/zagortenay333/Tempestacons'>Tempestacons</a> and formatted by <a href='https://github.com/rickellis/SVG-Weather-Icons'>rickellis</a>
+            Icons from <a href='https://github.com/zagortenay333/Tempestacons'>Tempestacons</a> and formatted by <a href='https://github.com/rickellis/SVG-Weather-Icons'>rickellis</a>
           </div>
         </div>
       )
