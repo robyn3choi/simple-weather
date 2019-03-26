@@ -1,0 +1,80 @@
+.header {
+    display: flex;
+    font-size: 7px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    align-items: center;
+}
+
+.header .or {
+    margin: 0 16px;
+}
+
+.header button {
+    border-width: 1px;
+}
+
+.header .location-button {
+    padding: 3px 23px;
+    height: 28px;
+}
+
+.header .search-bar__input {
+    padding: 5px 13px;
+    width: 240px;
+}
+
+.header .search-bar__button {
+    height: 28px;
+    width: 28px;
+}
+
+@media (max-width: 983px) {
+    .header {
+        left: 0;
+        right: 0;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+        width: 95%;
+    }
+
+    .header .search-bar-container {
+        flex: 2;
+    }
+
+    .header .location-button-container {
+        flex: 1;
+    }
+
+    .header .or {
+        flex: 0.2;
+        text-align: center;
+    }
+
+    .header .search-bar__input {
+        width:  90%;
+    }
+}
+
+@media (max-width: 645px) {
+    .header {
+        flex-wrap: wrap
+    }
+
+    .header .search-bar-container {
+        flex: none;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .header .location-button-container {
+        flex: none;
+    }
+
+    .header .or {
+        flex: none;
+        text-align: center;
+    }
+}

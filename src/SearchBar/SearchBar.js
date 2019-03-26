@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import Script from 'react-load-script';
+import { CSSTransition } from 'react-transition-group';
+import './SearchBar.css';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      hasSearchBarBeenFocused: false,
       city: '',
       query: ''
     };
@@ -12,7 +15,7 @@ class SearchBar extends Component {
     this.inputRef = React.createRef();
   }
 
-  handleScriptLoad() {
+  handleGoogleMapsScriptLoad() {
     // Declare Options For Autocomplete
     var options = {
       types: ['(cities)'],
@@ -34,9 +37,6 @@ class SearchBar extends Component {
     let addressObject = this.autocomplete.getPlace();
     let address = addressObject.address_components;
 
-    console.log(address[0].long_name)
-    console.log(addressObject.formatted_address)
-
     if (address) {
       this.setState(
         {
@@ -45,17 +45,40 @@ class SearchBar extends Component {
         }
       );
     }
+    else {
+      console.log("invalid address")
+    }
+  }
+
+  search() {
+    fetch(`http://localhost:8081/citysearch?placename=${this.state.query}`)
+      .then(response => response.json())
+      .then(data => this.props.setWeatherData(data.currentWeather, data.forecast))
+      .catch(err => console.log(err));
+  }
+
+  onSearchBarFocus() {
+    if (!this.state.hasSearchBarBeenFocused) {
+      this.handleGoogleMapsScriptLoad();
+      this.setState({ hasSearchBarBeenFocused: true });
+    }
   }
 
   render() {
     return (
-      <div>
+      <div className='search-bar-container'>
         <Script
           url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz0DDEzdxfkoZSvg2v3dKhZjJvgZX426A&libraries=places,geometry"
-          onLoad={() => this.handleScriptLoad()}
+          onLoad={() => console.log("google maps loaded")}
         />
-        <label htmlFor="city-search">City Name</label>
-        <input type="text" id="search-bar" ref={this.inputRef} placeholder="e.g. Vancouver, BC" />
+        <div className='search-bar'>
+          <div className='search-bar__input-and-button'>
+            <input type="text" className="search-bar__input" ref={this.inputRef} onFocus={() => this.onSearchBarFocus()} placeholder="Enter a city..." />
+            <button className='search-bar__button' onClick={() => this.search()}>
+              <img className='search-bar__button-icon' alt='search' src='/icons/search.svg' />
+            </button>
+          </div>
+        </div>
       </div>
     );
   }

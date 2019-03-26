@@ -5,16 +5,15 @@
 }
 
 .forecast-day_light {
-    background-color: rgba(255,255,255,0.08);
+    background-color: rgba(255,255,255,0.06);
 }
 
 .forecast-day__weekday {
     font-size: 1.5em;
-    font-weight: 300;
 }
 
 .forecast-day__date {
-    font-weight: 200;
+    font-weight: 300;
 }
 
 .forecast-day__main-icon {
@@ -25,7 +24,7 @@
     width: 150px;
     margin: auto;
     font-size: 0.85em;
-    font-weight: 200;
+    font-weight: 300;
     letter-spacing: 0.6px;
     height: 30px;
 }
@@ -41,7 +40,6 @@
 .forecast-day__icon-with-text {
     margin: 0 6px;
     font-size: 0.9em;
-    font-weight: 200;
 }
 
 .forecast-day__wind-speed-units {
@@ -57,7 +55,7 @@
     .forecast-day__icons-with-text {
         width: 100px;
         display: block;
-        margin: 10px auto 4px auto;
+        margin: 16px auto 4px auto;
     }
 
     .forecast-day__icon-with-text {
