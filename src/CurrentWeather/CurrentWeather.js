@@ -13,9 +13,12 @@ class CurrentWeather extends Component {
     return (
       <div className='current-weather'>
         <CSSTransition in={this.state.isMounted} classNames="fade" timeout={0}>
-          <div className='current-weather__icon-temp-container'>
-            <div className='current-weather__temp'>{this.props.data.temperature}&deg;</div>
-            <img className='current-weather__icon' alt='weather-icon' src={'/icons/' + this.props.data.icon + '.svg'} />
+          <div>
+            <div className='place-name'>{`In ${this.props.placeName}, it's:`}</div>
+            <div className='current-weather__icon-temp-container'>
+              <div className='current-weather__temp'>{this.props.data.temperature}&deg;</div>
+              <img className='current-weather__icon' alt='weather-icon' src={'/icons/' + this.props.data.icon + '.svg'} />
+            </div>
           </div>
         </CSSTransition>
         <CSSTransition in={this.state.isMounted} classNames="fade" timeout={80}>

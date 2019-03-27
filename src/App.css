@@ -12,31 +12,6 @@
   justify-content: center;
 }
 
-.dark-sky-attribution {
-  font-family: roboto;
-  font-size: 0.9em;
-  position: absolute;
-  bottom: 6px;
-  left: 6px;
-  color: white;
-}
-
-.dark-sky-attribution > a {
-  color: white;
-}
-
-.icons-attribution {
-  font-family: roboto;
-  font-size: 0.9em;
-  position: absolute;
-  bottom: 6px;
-  right: 6px;
-  color: white;
-}
-
-.icons-attribution > a {
-  color: white;
-}
 
 @media (max-width: 983px) {
   .app {
@@ -48,16 +23,6 @@
   .forecast {
     flex-direction: column;
     padding-bottom: 10px;
-  }
-
-  .dark-sky-attribution, .icons-attribution {
-    position: relative;
-    bottom: 12px;
-    text-align: center;
-    font-size: 0.8em;
-    line-height: 1.5em;
-    left:0;
-    right:0;
   }
 }
 

@@ -3,6 +3,7 @@ import DetectMyLocation from './../DetectMyLocation/DetectMyLocation';
 import SearchBar from './../SearchBar/SearchBar';
 import './LandingPage.css';
 import { CSSTransition } from 'react-transition-group';
+import Footer from './../Footer/Footer';
 
 class LandingPage extends Component {
   state = { isMounted: false };
@@ -24,8 +25,9 @@ class LandingPage extends Component {
         <CSSTransition in={this.state.isMounted} classNames="fade" timeout={50}>
           <SearchBar isLandingPage={true}
             setLocation={(pos) => this.props.setLocation(pos)}
-            setWeatherData={(curr, fore) => this.props.setWeatherData(curr, fore)} />
+            setWeatherDataFromPlaceName={(curr, fore, place) => this.props.setWeatherDataFromPlaceName(curr, fore, place)} />
         </CSSTransition>
+        <Footer isMainPage={false}/>
       </div>
     );
   }

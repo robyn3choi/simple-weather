@@ -1,0 +1,37 @@
+.footer {
+    position: absolute;
+    bottom: 4px;
+    text-align: center;
+    font-size: 14px;
+}
+
+button.footer__button {
+    border: none;
+    font-size: 1em;
+    padding: 0;
+    margin: 0 4px;
+    text-decoration: underline;
+}
+
+button.footer__button:hover {
+    background: none;
+    cursor: pointer;
+}
+
+button.footer__button:active {
+    box-shadow: none;
+}
+
+.footer__attribution {
+   margin: 2px;
+}
+
+.footer__attribution > a {
+    color: white;
+}
+
+@media (max-width: 983px) {
+    .footer_main-page {
+      position: relative;
+    }
+  }

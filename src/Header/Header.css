@@ -53,6 +53,10 @@
         text-align: center;
     }
 
+    .header .search-bar {
+        width:  100%;
+    }
+
     .header .search-bar__input {
         width:  90%;
     }

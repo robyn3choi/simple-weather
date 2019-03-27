@@ -3,39 +3,35 @@ import './App.css';
 import CurrentWeather from './CurrentWeather/CurrentWeather';
 import ForecastDay from './Forecast/ForecastDay';
 import LandingPage from './LandingPage/LandingPage';
-import SearchBar from './SearchBar/SearchBar';
 import Header from './Header/Header';
+import Footer from './Footer/Footer';
 
 class App extends Component {
   state = {
-    location: null,
+    coordinates: null,
+    placeName: '',
     currentWeather: null,
     forecast: null
   }
 
   setLocation(pos) {
-    this.setState({ location: pos });
-
-    // fetch(`http://localhost:8081/currentweather?lat=${pos.coords.latitude}&long=${pos.coords.longitude}`)
-    //   .then(response => response.json())
-    //   .then(data => this.setState({ currentWeather: data }))
-    //   .catch(err => console.log(err));
-
-    // fetch(`http://localhost:8081/forecast?lat=${pos.coords.latitude}&long=${pos.coords.longitude}`)
-    //   .then(response => response.json())
-    //   .then(data => this.setState({ forecast: data }))
-    //   .catch(err => console.log(err));
-
+    this.setState({ coordinates: pos });
     fetch(`http://localhost:8081/weather?lat=${pos.coords.latitude}&long=${pos.coords.longitude}`)
       .then(response => response.json())
-      .then(data => this.setState({ currentWeather: data.currentWeather, forecast: data.forecast }))
+      .then(data => this.setState({
+        placeName: data.placeName,
+        currentWeather: data.currentWeather,
+        forecast: data.forecast
+      }))
       .catch(err => console.log(err));
 
   }
 
-  setWeatherData(currentWeather, forecast) {
-    console.log(currentWeather)
-    this.setState({ currentWeather: currentWeather, forecast: forecast });
+  setWeatherDataFromPlaceName(currentWeather, forecast, placeName) {
+    this.setState({ 
+      placeName: placeName,
+      currentWeather: currentWeather, 
+      forecast: forecast });
   }
 
   render() {
@@ -47,15 +43,10 @@ class App extends Component {
         <div className='app'>
           <Header
             setLocation={(pos) => this.setLocation(pos)}
-            setWeatherData={(curr, fore) => this.setWeatherData(curr, fore)} />
-          <CurrentWeather data={this.state.currentWeather} />
+            setWeatherDataFromPlaceName={(curr, fore, place) => this.setWeatherDataFromPlaceName(curr, fore, place)} />
+          <CurrentWeather data={this.state.currentWeather} placeName={this.state.placeName} />
           <div className='forecast'>{forecastDays}</div>
-          <div className='dark-sky-attribution'>
-            Powered by <a href='https://darksky.net/poweredby/'>Dark Sky</a>
-          </div>
-          <div className='icons-attribution'>
-            Icons from <a href='https://github.com/zagortenay333/Tempestacons'>Tempestacons</a> and formatted by <a href='https://github.com/rickellis/SVG-Weather-Icons'>rickellis</a>
-          </div>
+          <Footer isMainPage={true}/>
         </div>
       )
     }
@@ -63,7 +54,7 @@ class App extends Component {
       return (
         <LandingPage
           setLocation={(pos) => this.setLocation(pos)}
-          setWeatherData={(curr, fore) => this.setWeatherData(curr, fore)} />
+          setWeatherDataFromPlaceName={(curr, fore, place) => this.setWeatherDataFromPlaceName(curr, fore, place)} />
       )
     }
 

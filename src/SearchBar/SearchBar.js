@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Script from 'react-load-script';
-import { CSSTransition } from 'react-transition-group';
 import './SearchBar.css';
 
 class SearchBar extends Component {
@@ -8,7 +7,6 @@ class SearchBar extends Component {
     super(props);
     this.state = {
       hasSearchBarBeenFocused: false,
-      city: '',
       query: ''
     };
 
@@ -36,11 +34,11 @@ class SearchBar extends Component {
     // Extract City From Address Object
     let addressObject = this.autocomplete.getPlace();
     let address = addressObject.address_components;
-
+    console.log(address)
+    console.log(addressObject)
     if (address) {
       this.setState(
         {
-          city: address[0].long_name,
           query: addressObject.formatted_address,
         }
       );
@@ -53,7 +51,7 @@ class SearchBar extends Component {
   search() {
     fetch(`http://localhost:8081/citysearch?placename=${this.state.query}`)
       .then(response => response.json())
-      .then(data => this.props.setWeatherData(data.currentWeather, data.forecast))
+      .then(data => this.props.setWeatherDataFromPlaceName(data.currentWeather, data.forecast, this.state.query))
       .catch(err => console.log(err));
   }
 
@@ -67,10 +65,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div className='search-bar-container'>
-        <Script
-          url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz0DDEzdxfkoZSvg2v3dKhZjJvgZX426A&libraries=places,geometry"
-          onLoad={() => console.log("google maps loaded")}
-        />
+        <Script url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz0DDEzdxfkoZSvg2v3dKhZjJvgZX426A&libraries=places,geometry"/>
         <div className='search-bar'>
           <div className='search-bar__input-and-button'>
             <input type="text" className="search-bar__input" ref={this.inputRef} onFocus={() => this.onSearchBarFocus()} placeholder="Enter a city..." />

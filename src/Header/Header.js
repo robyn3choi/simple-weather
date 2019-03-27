@@ -20,7 +20,7 @@ class Header extends Component {
           <div className='or'>Or</div>
           <SearchBar isLandingPage={false}
             setLocation={(pos) => this.props.setLocation(pos)}
-            setWeatherData={(curr, fore) => this.props.setWeatherData(curr, fore)} />
+            setWeatherDataFromPlaceName={(curr, fore, place) => this.props.setWeatherDataFromPlaceName(curr, fore, place)} />
       </div>
       </CSSTransition>
     );

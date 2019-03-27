@@ -4,6 +4,13 @@
     text-align: center;
 }
 
+.place-name {
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 300;
+    margin-bottom: 28px;
+  }
+
 .current-weather__icon-temp-container {
     display:flex;
     justify-content: center;
@@ -15,19 +22,38 @@
 }
 
 .current-weather__temp {
-    font-size: 5em;
-    font-weight: 300;
+    font-size: 7em;
+    font-weight: 400;
     margin-right: 20px;
 }
 
 .current-weather__description {
     font-size: 4em;
-    font-weight: 100;
+    font-weight: 300;
 }
 
 @media (max-width: 983px) {
     .current-weather {
-        margin-top: 20px;
+        margin-top: 0;
         margin-bottom: 26px;
+        font-size: 15px;
+        margin: 0 6px 26px 6px;
     }
-  }
+
+    .place-name {
+        margin-top: 30px;
+        margin-bottom: 0;
+      }
+}
+
+@media (max-width: 645px) {
+    .current-weather {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 380px) {
+    .current-weather {
+        font-size: 12px;
+    }
+}
