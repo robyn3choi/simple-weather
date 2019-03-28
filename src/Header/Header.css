@@ -30,7 +30,7 @@
     width: 28px;
 }
 
-@media (max-width: 983px) {
+@media (max-width: 983px), (max-height: 717px) {
     .header {
         left: 0;
         right: 0;

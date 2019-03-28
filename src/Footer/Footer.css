@@ -2,7 +2,9 @@
     position: absolute;
     bottom: 4px;
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
+    left: 0;
+    right: 0;
 }
 
 button.footer__button {
@@ -30,8 +32,14 @@ button.footer__button:active {
     color: white;
 }
 
-@media (max-width: 983px) {
+@media (max-width: 983px), (max-height: 717px) {
     .footer_main-page {
       position: relative;
     }
-  }
+}
+
+@media (max-height: 794px) and (min-width: 984px) {
+    .footer_main-page {
+        font-size: 12px;
+    }
+}

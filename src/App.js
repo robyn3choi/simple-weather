@@ -11,50 +11,83 @@ class App extends Component {
     coordinates: null,
     placeName: '',
     currentWeather: null,
-    forecast: null
+    forecast: null,
+    units: '',
+    entries: 0
   }
 
-  setLocation(pos) {
-    this.setState({ coordinates: pos });
-    fetch(`http://localhost:8081/weather?lat=${pos.coords.latitude}&long=${pos.coords.longitude}`)
+  componentDidMount() {
+    const storedPlaceName = localStorage.getItem('placeName');
+    if (storedPlaceName) {
+      this.setWeatherDataFromPlaceName(storedPlaceName);
+    }
+  }
+
+  areCoordsSameAsStored = (coords) => {
+    return !this.state.coordinates || (this.state.coordinates && coords.lat !== this.state.coordinates.lat 
+      && coords.long !== this.state.coordinates.long);
+  }
+
+  setWeatherDataFromPosition(coords) {
+    if (this.areCoordsSameAsStored(coords)) {
+      fetch(`https://api.howsthesky.com/weather?lat=${coords.lat}&long=${coords.long}`)
+        .then(response => response.json())
+        .then(data => {
+          localStorage.setItem('placeName', data.placeName);
+          this.setState({
+            coordinates: coords,
+            placeName: data.placeName,
+            currentWeather: data.currentWeather,
+            forecast: data.forecast,
+            units: data.units,
+            entries: this.state.entries+1
+          })
+        })
+        .catch(err => console.log(err));
+    }
+  }
+
+  setWeatherDataFromPlaceName(placeName) {
+    if (placeName !== this.state.placeName) {
+      fetch(`https://api.howsthesky.com/search?placename=${placeName}`)
       .then(response => response.json())
-      .then(data => this.setState({
-        placeName: data.placeName,
-        currentWeather: data.currentWeather,
-        forecast: data.forecast
-      }))
+      .then(data => {
+        localStorage.setItem('placeName', placeName);
+        this.setState({
+          coordinates: null,
+          placeName: placeName,
+          currentWeather: data.currentWeather,
+          forecast: data.forecast,
+          units: data.units,
+          entries: this.state.entries+1
+        })
+      })
       .catch(err => console.log(err));
-
-  }
-
-  setWeatherDataFromPlaceName(currentWeather, forecast, placeName) {
-    this.setState({ 
-      placeName: placeName,
-      currentWeather: currentWeather, 
-      forecast: forecast });
+    }
   }
 
   render() {
-    if (this.state.currentWeather && this.state.forecast) {
-      const forecastDays = this.state.forecast.map((day, i) =>
-        <ForecastDay key={'forecast-day-' + i} data={day} index={i} />
+    const { placeName, currentWeather, forecast, units, entries } = this.state;
+    if (currentWeather && forecast) {
+      const forecastDays = forecast.map((day, i) =>
+        <ForecastDay key={'forecast-day-' + i} data={day} index={i} units={units} entries={entries} />
       );
       return (
         <div className='app'>
           <Header
-            setLocation={(pos) => this.setLocation(pos)}
-            setWeatherDataFromPlaceName={(curr, fore, place) => this.setWeatherDataFromPlaceName(curr, fore, place)} />
-          <CurrentWeather data={this.state.currentWeather} placeName={this.state.placeName} />
+            setWeatherDataFromPosition={(pos) => this.setWeatherDataFromPosition(pos)}
+            setWeatherDataFromPlaceName={(place) => this.setWeatherDataFromPlaceName(place)} />
+          <CurrentWeather data={currentWeather} placeName={placeName} units={units} entries={entries}/>
           <div className='forecast'>{forecastDays}</div>
-          <Footer isMainPage={true}/>
+          <Footer isMainPage={true} />
         </div>
       )
     }
     else {
       return (
         <LandingPage
-          setLocation={(pos) => this.setLocation(pos)}
-          setWeatherDataFromPlaceName={(curr, fore, place) => this.setWeatherDataFromPlaceName(curr, fore, place)} />
+          setWeatherDataFromPosition={(pos) => this.setWeatherDataFromPosition(pos)}
+          setWeatherDataFromPlaceName={(place) => this.setWeatherDataFromPlaceName(place)} />
       )
     }
 

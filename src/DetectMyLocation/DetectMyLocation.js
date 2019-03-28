@@ -1,29 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './DetectMyLocation.css';
 
-class DetectMyLocation extends Component {
-  state = { isMounted: false };
-
-  componentDidMount() {
-    this.setState({ isMounted: true });
+const detectLocation = (props) => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      const coords = { lat: pos.coords.latitude, long: pos.coords.longitude };
+      props.setWeatherDataFromPosition(coords)
+    }, err => console.log(err));
   }
+}
 
-  detectLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(pos => this.props.setLocation(pos), err => console.log(err));
-    }
-  }
-
-  render() {
-    return (
-        <div className='location-button-container'>
-          <button className={`location-button`}
-            onClick={() => this.detectLocation()}>
-            Detect my location
+const DetectMyLocation = (props) => {
+  return (
+    <div className='location-button-container'>
+      <button className={`location-button`}
+        onClick={() => detectLocation(props)}>
+        Detect my location
           </button>
-        </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default DetectMyLocation;

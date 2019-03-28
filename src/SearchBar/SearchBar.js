@@ -34,8 +34,6 @@ class SearchBar extends Component {
     // Extract City From Address Object
     let addressObject = this.autocomplete.getPlace();
     let address = addressObject.address_components;
-    console.log(address)
-    console.log(addressObject)
     if (address) {
       this.setState(
         {
@@ -47,14 +45,7 @@ class SearchBar extends Component {
       console.log("invalid address")
     }
   }
-
-  search() {
-    fetch(`http://localhost:8081/citysearch?placename=${this.state.query}`)
-      .then(response => response.json())
-      .then(data => this.props.setWeatherDataFromPlaceName(data.currentWeather, data.forecast, this.state.query))
-      .catch(err => console.log(err));
-  }
-
+  
   onSearchBarFocus() {
     if (!this.state.hasSearchBarBeenFocused) {
       this.handleGoogleMapsScriptLoad();
@@ -69,7 +60,7 @@ class SearchBar extends Component {
         <div className='search-bar'>
           <div className='search-bar__input-and-button'>
             <input type="text" className="search-bar__input" ref={this.inputRef} onFocus={() => this.onSearchBarFocus()} placeholder="Enter a city..." />
-            <button className='search-bar__button' onClick={() => this.search()}>
+            <button className='search-bar__button' onClick={place => this.props.setWeatherDataFromPlaceName(this.state.query)}>
               <img className='search-bar__button-icon' alt='search' src='/icons/search.svg' />
             </button>
           </div>

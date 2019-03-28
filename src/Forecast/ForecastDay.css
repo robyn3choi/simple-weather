@@ -71,7 +71,7 @@
     }
 }
 
-@media (max-width: 983px) {
+@media (max-width: 983px), (max-height: 717px) {
     .forecast-day {
         display: flex;
         justify-content: left;
@@ -113,6 +113,8 @@
         margin-top:0;
         margin-right: 3%;
         margin-left: 2%;
+        width: auto;
+        display: flex;
     }
 
     .forecast-day__icon-with-text {
@@ -121,6 +123,7 @@
         font-size: 1.2em;
         font-weight: 200;
         flex: 1;
+        display: block;
     }
     
     .forecast-day__icon {
@@ -154,7 +157,7 @@
 
 @media (max-width: 548px) {
     .forecast-day__weekday-date {
-        flex: 1;
+        flex: 0.7;
     }
 
     .forecast-day__description {
@@ -164,6 +167,10 @@
     .forecast-day__main-icon {
         height: 100px;
         flex: 0.5;
+    }
+
+    .forecast-day__icon-with-text {
+        font-size: 0.9em;
     }
 }
 
@@ -187,8 +194,8 @@
     }
 
     .forecast-day__icon-with-text {
-        font-size: 1em;
         width: 48px;
+        font-size: 0.8em;
     }
     
     .forecast-day__icon {
@@ -216,7 +223,6 @@
     }
 
     .forecast-day__icon-with-text {
-        font-size: 0.9em;
         width: 48px;
     }
     
