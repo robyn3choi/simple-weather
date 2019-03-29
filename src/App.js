@@ -9,16 +9,17 @@ import Footer from './Footer/Footer';
 class App extends Component {
   state = {
     coordinates: null,
-    placeName: '',
+    placeName: null,
     currentWeather: null,
     forecast: null,
-    units: '',
+    units: null,
     entries: 0
   }
 
   componentDidMount() {
     const storedPlaceName = localStorage.getItem('placeName');
     if (storedPlaceName) {
+      this.setState({placeName: storedPlaceName});
       this.setWeatherDataFromPlaceName(storedPlaceName);
     }
   }
@@ -87,15 +88,16 @@ class App extends Component {
         </div>
       )
     }
-    else {
+    else if (!this.state.placeName) {
       return (
         <LandingPage
           setWeatherDataFromPosition={(pos) => this.setWeatherDataFromPosition(pos)}
           setWeatherDataFromPlaceName={(place) => this.setWeatherDataFromPlaceName(place)} />
       )
     }
-
-
+    else {
+      return null;
+    }
   }
 }
 
