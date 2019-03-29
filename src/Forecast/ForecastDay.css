@@ -71,7 +71,7 @@
     }
 }
 
-@media (max-width: 983px), (max-height: 717px) {
+@media (max-width: 983px), (max-height: 750px) {
     .forecast-day {
         display: flex;
         justify-content: left;
