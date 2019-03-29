@@ -66,6 +66,10 @@ class App extends Component {
     }
   }
 
+  openPrivacyPolicy = () => {
+    this.setState({isPrivacyPolicyOpen: true});
+  }
+
   render() {
     const { placeName, currentWeather, forecast, units, entries } = this.state;
     if (currentWeather && forecast) {
