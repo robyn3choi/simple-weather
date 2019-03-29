@@ -5,7 +5,7 @@ const Footer = (props) => {
   return (
     <div className={`footer ${props.isMainPage ? 'footer_main-page' : 'footer_landing-page'}`}>
       <div className='footer__buttons'>
-        <a href='https://github.com/robyn3choi/simple-weather/blob/master/termsofuseandprivacypolicy.md' className='footer__link'>
+        <a href='https://github.com/robyn3choi/simple-weather/blob/master/TermsOfUseAndPrivacyPolicy.md' className='footer__link' target='_blank' rel='noopener noreferrer'>
           Terms of Use and Privacy Policy
         </a>
       </div>
