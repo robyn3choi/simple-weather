@@ -56,10 +56,14 @@
 }
 
 @media (min-width: 984px) and (max-width: 1470px) {
+    .forecast-day {
+        width: 10%;
+    }
+
     .forecast-day__icons-with-text {
         width: 100px;
         display: block;
-        margin: 6px auto 4px auto;
+        margin: 2px auto 4px auto;
     }
 
     .forecast-day__icon-with-text {
@@ -68,7 +72,7 @@
     }
 
     .forecast-day__description {
-        width: 100px;
+        width: 90%;
         font-size: 0.8em;
         letter-spacing: 0.2px;
         height: 50px;
