@@ -2,6 +2,7 @@
     text-align: center;
     flex: auto;
     padding: 12px 4px;
+    max-width: 190px;
 }
 
 .forecast-day_light {
@@ -90,6 +91,7 @@
         align-items: center;
         height: 96px;
         text-align: left;
+        max-width: unset;
     }
 
     .forecast-day__weekday-date {

@@ -5,6 +5,7 @@ import ForecastDay from './Forecast/ForecastDay';
 import LandingPage from './LandingPage/LandingPage';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
+import axios from 'axios';
 
 class App extends Component {
   state = {
@@ -31,16 +32,15 @@ class App extends Component {
 
   setWeatherDataFromPosition(coords) {
     if (this.areCoordsSameAsStored(coords)) {
-      fetch(`https://api.howsthesky.com/weather?lat=${coords.lat}&long=${coords.long}`)
-        .then(response => response.json())
-        .then(data => {
-          localStorage.setItem('placeName', data.placeName);
+      axios.get(`https://api.howsthesky.com/weather?lat=${coords.lat}&long=${coords.long}`)
+        .then(res => {
+          localStorage.setItem('placeName', res.data.placeName);
           this.setState({
             coordinates: coords,
-            placeName: data.placeName,
-            currentWeather: data.currentWeather,
-            forecast: data.forecast,
-            units: data.units,
+            placeName: res.data.placeName,
+            currentWeather: res.data.currentWeather,
+            forecast: res.data.forecast,
+            units: res.data.units,
             entries: this.state.entries+1
           })
         })
@@ -50,16 +50,15 @@ class App extends Component {
 
   setWeatherDataFromPlaceName(placeName) {
     if (placeName !== this.state.placeName) {
-      fetch(`https://api.howsthesky.com/search?placename=${placeName}`)
-      .then(response => response.json())
-      .then(data => {
+      axios.get(`https://api.howsthesky.com/search?placename=${placeName}`)
+      .then(res => {
         localStorage.setItem('placeName', placeName);
         this.setState({
           coordinates: null,
           placeName: placeName,
-          currentWeather: data.currentWeather,
-          forecast: data.forecast,
-          units: data.units,
+          currentWeather: res.data.currentWeather,
+          forecast: res.data.forecast,
+          units: res.data.units,
           entries: this.state.entries+1
         })
       })
