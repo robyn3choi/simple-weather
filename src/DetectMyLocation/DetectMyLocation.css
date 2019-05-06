@@ -1,3 +1,46 @@
 .location-button {
     width: 100%;
 }
+
+.location-error {
+    position: absolute;
+    top: 0;
+    padding: 8px;
+    width: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffd023;
+    color: rgb(58, 58, 58);
+    box-shadow: 3px 3px 6px 6px rgb(0, 0, 0, 0.1);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+.location-error_displayed {
+    visibility: visible;
+    opacity: 1;
+}
+
+.location-error__text {
+    width: 260px;
+    font-size: 14px;
+}
+
+.location-error__exit-btn {
+    font-size:1.2em;
+    font-weight: 500;
+    padding: 6px 10px;
+    border: none;
+    color: rgb(175, 175, 175);
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-53%);
+    transition: color 0.2s;
+}
+
+.location-error__exit-btn:hover {
+    background: none;
+    color: rgb(121, 121, 121);
+}
