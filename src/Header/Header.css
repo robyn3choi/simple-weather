@@ -2,8 +2,8 @@
     display: flex;
     font-size: 7px;
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 16px;
+    left: 16px;
     align-items: center;
 }
 
@@ -30,7 +30,7 @@
     width: 28px;
 }
 
-@media (max-width: 983px), (max-height: 750px) {
+@media (max-width: 1115px), (max-height: 750px) {
     .header {
         left: 0;
         right: 0;

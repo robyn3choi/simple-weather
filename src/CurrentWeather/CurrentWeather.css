@@ -32,7 +32,7 @@
     font-weight: 300;
 }
 
-@media (max-width: 983px), (max-height: 750px) {
+@media (max-width: 1115px), (max-height: 750px) {
     .current-weather {
         margin-top: 0;
         margin-bottom: 26px;
@@ -41,7 +41,7 @@
     }
 
     .place-name {
-        margin-top: 30px;
+        margin-top: 40px;
         margin-bottom: 0;
       }
 }

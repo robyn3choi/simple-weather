@@ -31,7 +31,7 @@
 }
 
 .forecast-day__description_small {
-    font-size: 0.75em;
+    font-size: 0.7em;
 }
 
 .forecast-day__icons-with-text {
@@ -80,11 +80,11 @@
     }
 
     .forecast-day__description_small {
-        font-size: 0.7em;
+        font-size: 0.65em;
     }
 }
 
-@media (max-width: 983px), (max-height: 750px) {
+@media (max-width: 1115px), (max-height: 750px) {
     .forecast-day {
         display: flex;
         justify-content: left;
@@ -92,6 +92,7 @@
         height: 96px;
         text-align: left;
         max-width: unset;
+        width: auto;
     }
 
     .forecast-day__weekday-date {
