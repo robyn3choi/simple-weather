@@ -14,26 +14,30 @@ class App extends Component {
     currentWeather: null,
     forecast: null,
     units: null,
-    entries: 0
-  }
+  };
 
   componentDidMount() {
     const storedPlaceName = localStorage.getItem('placeName');
     if (storedPlaceName) {
-      this.setState({placeName: storedPlaceName});
+      this.setState({ placeName: storedPlaceName });
       this.setWeatherDataFromPlaceName(storedPlaceName);
     }
   }
 
   areCoordsSameAsStored = (coords) => {
-    return !this.state.coordinates || (this.state.coordinates && coords.lat !== this.state.coordinates.lat 
-      && coords.long !== this.state.coordinates.long);
-  }
+    return (
+      !this.state.coordinates ||
+      (this.state.coordinates &&
+        coords.lat !== this.state.coordinates.lat &&
+        coords.long !== this.state.coordinates.long)
+    );
+  };
 
   setWeatherDataFromPosition(coords) {
     if (this.areCoordsSameAsStored(coords)) {
-      axios.get(`https://api.howsthesky.com/weather?lat=${coords.lat}&long=${coords.long}`)
-        .then(res => {
+      axios
+        .get(`https://api.howsthesky.com/weather?lat=${coords.lat}&long=${coords.long}`)
+        .then((res) => {
           localStorage.setItem('placeName', res.data.placeName);
           this.setState({
             coordinates: coords,
@@ -41,60 +45,59 @@ class App extends Component {
             currentWeather: res.data.currentWeather,
             forecast: res.data.forecast,
             units: res.data.units,
-            entries: this.state.entries+1
-          })
+          });
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     }
   }
 
   setWeatherDataFromPlaceName(placeName) {
     if (placeName !== this.state.placeName) {
-      axios.get(`https://api.howsthesky.com/search?placename=${placeName}`)
-      .then(res => {
-        localStorage.setItem('placeName', placeName);
-        this.setState({
-          coordinates: null,
-          placeName: placeName,
-          currentWeather: res.data.currentWeather,
-          forecast: res.data.forecast,
-          units: res.data.units,
-          entries: this.state.entries+1
+      axios
+        .get(`https://api.howsthesky.com/search?placename=${placeName}`)
+        .then((res) => {
+          localStorage.setItem('placeName', placeName);
+          this.setState({
+            coordinates: null,
+            placeName: placeName,
+            currentWeather: res.data.currentWeather,
+            forecast: res.data.forecast,
+            units: res.data.units,
+          });
         })
-      })
-      .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     }
   }
 
   openPrivacyPolicy = () => {
-    this.setState({isPrivacyPolicyOpen: true});
-  }
+    this.setState({ isPrivacyPolicyOpen: true });
+  };
 
   render() {
-    const { placeName, currentWeather, forecast, units, entries } = this.state;
+    const { placeName, currentWeather, forecast, units } = this.state;
     if (currentWeather && forecast) {
-      const forecastDays = forecast.map((day, i) =>
-        <ForecastDay key={'forecast-day-' + i} data={day} index={i} units={units} entries={entries} />
-      );
+      const forecastDays = forecast.map((day, i) => (
+        <ForecastDay key={'forecast-day-' + i} data={day} index={i} units={units} />
+      ));
       return (
-        <div className='app'>
+        <div className="app">
           <Header
             setWeatherDataFromPosition={(pos) => this.setWeatherDataFromPosition(pos)}
-            setWeatherDataFromPlaceName={(place) => this.setWeatherDataFromPlaceName(place)} />
-          <CurrentWeather data={currentWeather} placeName={placeName} units={units} entries={entries}/>
-          <div className='forecast'>{forecastDays}</div>
+            setWeatherDataFromPlaceName={(place) => this.setWeatherDataFromPlaceName(place)}
+          />
+          <CurrentWeather data={currentWeather} placeName={placeName} units={units} />
+          <div className="forecast">{forecastDays}</div>
           <Footer isMainPage={true} />
         </div>
-      )
-    }
-    else if (!this.state.placeName) {
+      );
+    } else if (!this.state.placeName) {
       return (
         <LandingPage
           setWeatherDataFromPosition={(pos) => this.setWeatherDataFromPosition(pos)}
-          setWeatherDataFromPlaceName={(place) => this.setWeatherDataFromPlaceName(place)} />
-      )
-    }
-    else {
+          setWeatherDataFromPlaceName={(place) => this.setWeatherDataFromPlaceName(place)}
+        />
+      );
+    } else {
       return null;
     }
   }
