@@ -8,13 +8,9 @@ const Header = (props) => {
   return (
     <FadeIn timeout={400}>
       <div className="header">
-        <DetectMyLocation
-          isLandingPage={false}
-          setWeatherDataFromPosition={(pos) => props.setWeatherDataFromPosition(pos)}
-        />
+        <DetectMyLocation setWeatherDataFromPosition={(pos) => props.setWeatherDataFromPosition(pos)} />
         <div className="or">Or</div>
         <SearchBar
-          isLandingPage={false}
           setWeatherDataFromPosition={(pos) => props.setWeatherDataFromPosition(pos)}
           setWeatherDataFromPlaceName={(place) => props.setWeatherDataFromPlaceName(place)}
         />

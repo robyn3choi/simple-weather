@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import './FadeIn.css';
 
-// will fade in every time this.props.counter is incremented
 class FadeIn extends Component {
   state = { fadeInTrigger: false };
 
