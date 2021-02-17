@@ -6,17 +6,21 @@ import './Header.css';
 
 const Header = (props) => {
   return (
-    <FadeIn counter={props.entries} timeout={400}>
-      <div className='header'>
-        <DetectMyLocation isLandingPage={false}
-          setWeatherDataFromPosition={(pos) => props.setWeatherDataFromPosition(pos)} />
-        <div className='or'>Or</div>
-        <SearchBar isLandingPage={false}
+    <FadeIn timeout={400}>
+      <div className="header">
+        <DetectMyLocation
+          isLandingPage={false}
           setWeatherDataFromPosition={(pos) => props.setWeatherDataFromPosition(pos)}
-          setWeatherDataFromPlaceName={(place) => props.setWeatherDataFromPlaceName(place)} />
+        />
+        <div className="or">Or</div>
+        <SearchBar
+          isLandingPage={false}
+          setWeatherDataFromPosition={(pos) => props.setWeatherDataFromPosition(pos)}
+          setWeatherDataFromPlaceName={(place) => props.setWeatherDataFromPlaceName(place)}
+        />
       </div>
     </FadeIn>
   );
-}
+};
 
 export default Header;
