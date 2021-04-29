@@ -1,6 +1,6 @@
-import DetectMyLocation from './../DetectMyLocation/DetectMyLocation';
-import SearchBar from './../SearchBar/SearchBar';
-import FadeIn from './../FadeIn/FadeIn';
+import DetectMyLocation from '../DetectMyLocation/DetectMyLocation';
+import SearchBar from '../SearchBar/SearchBar';
+import FadeIn from '../FadeIn/FadeIn';
 import './Header.css';
 
 export default function Header(props) {

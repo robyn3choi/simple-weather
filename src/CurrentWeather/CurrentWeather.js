@@ -1,5 +1,5 @@
-import FadeIn from "./../FadeIn/FadeIn";
-import "./CurrentWeather.css";
+import FadeIn from '../FadeIn/FadeIn';
+import './CurrentWeather.css';
 
 export default function CurrentWeather(props) {
   return (
@@ -9,7 +9,7 @@ export default function CurrentWeather(props) {
           <div className="place-name">{`In ${props.placeName}, it's:`}</div>
           <div className="current-weather__icon-temp-container">
             <div className="current-weather__temp">{props.data.temperature}&deg;</div>
-            <img className="current-weather__icon" alt="weather-icon" src={"/icons/" + props.data.icon + ".svg"} />
+            <img className="current-weather__icon" alt="weather-icon" src={'/icons/' + props.data.icon + '.svg'} />
           </div>
         </div>
       </FadeIn>

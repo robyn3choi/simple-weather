@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import FadeIn from './../FadeIn/FadeIn';
+import FadeIn from '../FadeIn/FadeIn';
 import { WEEKDAY_NAMES, WINDSPEED_UNITS } from '../constants';
 import './ForecastDay.css';
 

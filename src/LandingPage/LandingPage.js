@@ -1,7 +1,7 @@
-import DetectMyLocation from './../DetectMyLocation/DetectMyLocation';
-import SearchBar from './../SearchBar/SearchBar';
-import FadeIn from './../FadeIn/FadeIn';
-import Footer from './../Footer/Footer';
+import DetectMyLocation from '../DetectMyLocation/DetectMyLocation';
+import SearchBar from '../SearchBar/SearchBar';
+import FadeIn from '../FadeIn/FadeIn';
+import Footer from '../Footer/Footer';
 import './LandingPage.css';
 
 export default function LandingPage(props) {
