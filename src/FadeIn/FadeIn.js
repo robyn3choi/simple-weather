@@ -1,21 +1,17 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import './FadeIn.css';
 
-class FadeIn extends Component {
-  state = { fadeInTrigger: false };
+export default function FadeIn(props) {
+  const [shouldFadeIn, setShouldFadeIn] = useState(false);
 
-  componentDidMount() {
-    this.setState({ fadeInTrigger: true });
-  }
+  useEffect(() => {
+    setShouldFadeIn(true);
+  }, []);
 
-  render() {
-    return (
-      <CSSTransition in={this.state.fadeInTrigger} classNames="fade" timeout={this.props.timeout}>
-        {this.props.children}
-      </CSSTransition>
-    );
-  }
+  return (
+    <CSSTransition in={shouldFadeIn} classNames="fade" timeout={props.timeout}>
+      {props.children}
+    </CSSTransition>
+  );
 }
-
-export default FadeIn;

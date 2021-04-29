@@ -3,7 +3,7 @@ import SearchBar from './../SearchBar/SearchBar';
 import FadeIn from './../FadeIn/FadeIn';
 import './Header.css';
 
-const Header = (props) => {
+export default function Header(props) {
   return (
     <FadeIn timeout={400}>
       <div className="header">
@@ -16,6 +16,4 @@ const Header = (props) => {
       </div>
     </FadeIn>
   );
-};
-
-export default Header;
+}

@@ -1,10 +1,10 @@
 import DetectMyLocation from './../DetectMyLocation/DetectMyLocation';
 import SearchBar from './../SearchBar/SearchBar';
-import './LandingPage.css';
 import FadeIn from './../FadeIn/FadeIn';
 import Footer from './../Footer/Footer';
+import './LandingPage.css';
 
-const LandingPage = (props) => {
+export default function LandingPage(props) {
   return (
     <div className="landing-page">
       <FadeIn timeout={50}>
@@ -22,6 +22,4 @@ const LandingPage = (props) => {
       <Footer isMainPage={false} />
     </div>
   );
-};
-
-export default LandingPage;
+}

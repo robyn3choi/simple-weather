@@ -1,73 +1,57 @@
-import { createRef, Component } from 'react';
+/*global google*/
+import { useRef, useState } from 'react';
 import Script from 'react-load-script';
 import './SearchBar.css';
 
-class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hasSearchBarBeenFocused: false,
-      query: ''
-    };
+export default function SearchBar(props) {
+  const [hasLoadedGoogleMaps, setHasLoadedGoogleMaps] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
-    this.inputRef = createRef();
+  const inputRef = useRef(null);
+  let autocomplete;
+
+  function handleSearchBarFocus() {
+    if (!hasLoadedGoogleMaps) {
+      handleGoogleMapsScriptLoad();
+    }
   }
 
-  handleGoogleMapsScriptLoad() {
-    // Declare Options For Autocomplete
-    var options = {
-      types: ['(cities)'],
-    };
+  function handleGoogleMapsScriptLoad() {
+    var autocompleteOptions = { types: ['(cities)'] };
+    autocomplete = new google.maps.places.Autocomplete(inputRef.current, autocompleteOptions);
 
-    // Initialize Google Autocomplete
-    /*global google*/ // To disable any eslint 'google not defined' errors
-    this.autocomplete = new google.maps.places.Autocomplete(
-      this.inputRef.current,
-      options,
-    );
-
-    // Fire Event when a suggested name is selected
-    this.autocomplete.addListener('place_changed', () => this.handlePlaceSelect());
+    autocomplete.addListener('place_changed', handlePlaceSelect);
+    setHasLoadedGoogleMaps(true);
   }
 
-  handlePlaceSelect() {
+  function handlePlaceSelect() {
     // Extract City From Address Object
-    let addressObject = this.autocomplete.getPlace();
+    let addressObject = autocomplete.getPlace();
     let address = addressObject.address_components;
     if (address) {
-      this.setState(
-        {
-          query: addressObject.formatted_address,
-        }
-      );
-    }
-    else {
-      console.log("invalid address")
-    }
-  }
-  
-  onSearchBarFocus() {
-    if (!this.state.hasSearchBarBeenFocused) {
-      this.handleGoogleMapsScriptLoad();
-      this.setState({ hasSearchBarBeenFocused: true });
+      setSearchQuery(addressObject.formatted_address);
+    } else {
+      console.log('invalid address');
     }
   }
 
-  render() {
-    return (
-      <div className='search-bar-container'>
-        <Script url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz0DDEzdxfkoZSvg2v3dKhZjJvgZX426A&libraries=places,geometry"/>
-        <div className='search-bar'>
-          <div className='search-bar__input-and-button'>
-            <input type="text" className="search-bar__input" ref={this.inputRef} onFocus={() => this.onSearchBarFocus()} placeholder="Enter a city..." />
-            <button className='search-bar__button' onClick={place => this.props.setWeatherDataFromPlaceName(this.state.query)}>
-              <img className='search-bar__button-icon' alt='search' src='/icons/search.svg' />
-            </button>
-          </div>
+  return (
+    <div className="search-bar-container">
+      <Script url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz0DDEzdxfkoZSvg2v3dKhZjJvgZX426A&libraries=places,geometry" />
+      <div className="search-bar">
+        <div className="search-bar__input-and-button">
+          <input
+            type="text"
+            className="search-bar__input"
+            ref={inputRef}
+            onFocus={handleSearchBarFocus}
+            placeholder="Enter a city..."
+          />
+          <button className="search-bar__button" onClick={() => props.setWeatherDataFromPlaceName(searchQuery)}>
+            <img className="search-bar__button-icon" alt="search" src="/icons/search.svg" />
+          </button>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-export default SearchBar;
