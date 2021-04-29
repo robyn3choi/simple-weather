@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import './FadeIn.css';
 

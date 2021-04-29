@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { createRef, Component } from 'react';
 import Script from 'react-load-script';
 import './SearchBar.css';
 
@@ -10,7 +10,7 @@ class SearchBar extends Component {
       query: ''
     };
 
-    this.inputRef = React.createRef();
+    this.inputRef = createRef();
   }
 
   handleGoogleMapsScriptLoad() {

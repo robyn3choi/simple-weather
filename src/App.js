@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import './App.css';
 import CurrentWeather from './CurrentWeather/CurrentWeather';
 import ForecastDay from './Forecast/ForecastDay';

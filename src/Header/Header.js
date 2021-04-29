@@ -1,4 +1,3 @@
-import React from 'react';
 import DetectMyLocation from './../DetectMyLocation/DetectMyLocation';
 import SearchBar from './../SearchBar/SearchBar';
 import FadeIn from './../FadeIn/FadeIn';

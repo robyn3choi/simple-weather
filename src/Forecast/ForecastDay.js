@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { createRef, Component } from 'react';
 import FadeIn from './../FadeIn/FadeIn';
 import * as Constants from './../Constants';
 import './ForecastDay.css';
@@ -7,7 +7,7 @@ class ForecastDay extends Component {
   constructor(props) {
     super(props);
     this.state = { descHasSmallerFont: false };
-    this.descRef = React.createRef();
+    this.descRef = createRef();
   }
 
   componentDidMount() {

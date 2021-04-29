@@ -1,4 +1,3 @@
-import React from 'react';
 import FadeIn from './../FadeIn/FadeIn';
 import './CurrentWeather.css';
 
