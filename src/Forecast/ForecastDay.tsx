@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { WEEKDAY_NAMES, WINDSPEED_UNITS } from '../constants';
 import FadeIn from '../FadeIn/FadeIn';
-import { useWeatherData } from '../WeatherProvider';
 import ForecastDetail from './ForecastDetail';
 import ForecastDayType from '../types/ForecastDay';
 import './Forecast.css';
