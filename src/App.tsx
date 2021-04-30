@@ -9,7 +9,7 @@ export default function App() {
     return <WeatherReport />;
   }
 
-  if (weatherData && !weatherData.placeName) {
+  if (!weatherData || !weatherData.placeName) {
     return <Splash />;
   }
 
