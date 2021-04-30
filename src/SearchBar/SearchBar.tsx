@@ -1,13 +1,15 @@
 /*global google*/
 import { useRef, useState } from 'react';
 import Script from 'react-load-script';
+import { useWeatherData } from '../WeatherProvider';
 import './SearchBar.css';
 
-export default function SearchBar(props) {
+export default function SearchBar() {
+  const { setWeatherDataFromPlaceName } = useWeatherData();
   const [hasLoadedGoogleMaps, setHasLoadedGoogleMaps] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   let autocomplete;
 
   function handleSearchBarFocus() {
@@ -18,7 +20,7 @@ export default function SearchBar(props) {
 
   function handleGoogleMapsScriptLoad() {
     var autocompleteOptions = { types: ['(cities)'] };
-    autocomplete = new google.maps.places.Autocomplete(inputRef.current, autocompleteOptions);
+    autocomplete = new google.maps.places.Autocomplete(inputRef.current!, autocompleteOptions);
 
     autocomplete.addListener('place_changed', handlePlaceSelect);
     setHasLoadedGoogleMaps(true);
@@ -47,7 +49,7 @@ export default function SearchBar(props) {
             onFocus={handleSearchBarFocus}
             placeholder="Enter a city..."
           />
-          <button className="search-bar__button" onClick={() => props.setWeatherDataFromPlaceName(searchQuery)}>
+          <button className="search-bar__button" onClick={() => setWeatherDataFromPlaceName(searchQuery)}>
             <img className="search-bar__button-icon" alt="search" src="/icons/search.svg" />
           </button>
         </div>

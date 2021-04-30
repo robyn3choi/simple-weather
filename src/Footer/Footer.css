@@ -1,46 +1,46 @@
 .footer {
-    position: absolute;
-    bottom: 4px;
-    text-align: center;
-    font-size: 13px;
-    left: 0;
-    right: 0;
+  position: absolute;
+  bottom: 4px;
+  text-align: center;
+  font-size: 13px;
+  left: 0;
+  right: 0;
 }
 
 .footer__line {
-    margin: 3px;
+  margin: 3px;
 }
 
 .footer__button {
-    font-size:1em;
-    padding: 2px 10px;
-    border-width: 1px;
+  font-size: 1em;
+  padding: 2px 10px;
+  border-width: 1px;
 }
 
 .footer__link {
-    color: white;
+  color: white;
 }
 
 .footer__attribution {
-   margin: 2px;
+  margin: 2px;
 }
 
 .footer__attribution > a {
-    color: white;
+  color: white;
 }
 
 @media (max-width: 1115px), (max-height: 750px) {
-    .footer {
-      position: relative;
-    }
+  .footer {
+    position: relative;
+  }
 
-    .footer_landing-page {
-        margin-top: 30px;
-    }
+  .footer--splash {
+    margin-top: 30px;
+  }
 }
 
 @media (max-height: 800px) and (min-width: 984px) {
-    .footer_main-page {
-        font-size: 12px;
-    }
+  .footer--main-page {
+    font-size: 12px;
+  }
 }

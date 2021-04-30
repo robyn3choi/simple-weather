@@ -1,8 +1,12 @@
 import './Footer.css';
 
-export default function Footer(props) {
+type Props = {
+  isMainPage: boolean;
+};
+
+export default function Footer({ isMainPage }: Props) {
   return (
-    <div className={`footer ${props.isMainPage ? 'footer_main-page' : 'footer_landing-page'}`}>
+    <div className={`footer ${isMainPage ? 'footer--main-page' : 'footer--splash'}`}>
       <div className="footer__line">
         <a
           href="https://github.com/robyn3choi/simple-weather/blob/master/TermsOfUseAndPrivacyPolicy.md"

@@ -1,0 +1,46 @@
+.splash {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.or {
+  margin: 20px 0;
+  font-size: 3em;
+  font-weight: 300;
+}
+
+@media (max-width: 680px) {
+  .splash {
+    font-size: 12px;
+  }
+
+  .splash .search-bar__button {
+    height: 46px;
+    width: 46px;
+  }
+}
+
+@media (max-width: 585px) {
+  .splash .search-bar-container,
+  .splash .location-button-container {
+    width: 90%;
+  }
+
+  .splash .search-bar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .splash .search-bar__input-and-button {
+    flex-direction: column;
+  }
+
+  .splash .search-bar__input {
+    margin-bottom: 12px;
+    width: 90%;
+  }
+}

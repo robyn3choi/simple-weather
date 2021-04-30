@@ -3,13 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.0.1",
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.3",
     "axios": "^0.21.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^16.8.4",
     "react-load-script": "0.0.6",
     "react-scripts": "^4.0.3",
-    "react-transition-group": "^2.7.0"
+    "react-transition-group": "^2.7.0",
+    "typescript": "^4.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,5 +30,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@types/googlemaps": "^3.43.3"
+  }
 }

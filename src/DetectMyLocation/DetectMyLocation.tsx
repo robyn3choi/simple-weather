@@ -1,18 +1,17 @@
 import { useState } from 'react';
+import { useWeatherData } from '../WeatherProvider';
 import './DetectMyLocation.css';
 
-export default function DetectMyLocation(props) {
+export default function DetectMyLocation() {
+  const { setWeatherDataFromPosition } = useWeatherData();
   const [isErrorMsgDisplayed, setIsErrorMsgDisplayed] = useState(false);
 
   function detectLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
-          const coords = {
-            lat: pos.coords.latitude,
-            long: pos.coords.longitude,
-          };
-          props.setWeatherDataFromPosition(coords);
+          const { latitude, longitude } = pos.coords;
+          setWeatherDataFromPosition({ latitude, longitude });
         },
         (err) => {
           console.log(err);
