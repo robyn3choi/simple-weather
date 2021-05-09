@@ -5,6 +5,7 @@ import Coordinates from './types/Coordinates';
 
 type ContextValue = {
   weatherData: WeatherData | null;
+  isLoading: boolean;
   setWeatherDataFromPlaceName: (placeName: string) => void;
   setWeatherDataFromPosition: (coords: Coordinates) => void;
 };
@@ -13,6 +14,7 @@ const WeatherDataContext = createContext<ContextValue | undefined>(undefined);
 
 export function WeatherDataProvider({ children }: { children: ReactNode }) {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const storedPlaceName = localStorage.getItem('placeName');
@@ -26,6 +28,7 @@ export function WeatherDataProvider({ children }: { children: ReactNode }) {
   async function setWeatherDataFromPlaceName(placeName: string) {
     if (!weatherData || placeName !== weatherData.placeName) {
       try {
+        setIsLoading(true);
         const res = await axios.get(`https://api.howsthesky.com/search?placename=${placeName}`);
         localStorage.setItem('placeName', placeName);
         setWeatherData({
@@ -34,6 +37,7 @@ export function WeatherDataProvider({ children }: { children: ReactNode }) {
           forecast: res.data.forecast,
           units: res.data.units,
         });
+        setIsLoading(false);
       } catch (err) {
         console.error(err);
       }
@@ -43,6 +47,7 @@ export function WeatherDataProvider({ children }: { children: ReactNode }) {
   async function setWeatherDataFromPosition(coords: Coordinates) {
     if (areCoordinatesNew(coords)) {
       try {
+        setIsLoading(true);
         const res = await axios.get(
           `https://api.howsthesky.com/weather?lat=${coords.latitude}&long=${coords.longitude}`
         );
@@ -54,6 +59,7 @@ export function WeatherDataProvider({ children }: { children: ReactNode }) {
           forecast: res.data.forecast,
           units: res.data.units,
         });
+        setIsLoading(false);
       } catch (err) {
         console.error(err);
       }
@@ -70,7 +76,9 @@ export function WeatherDataProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <WeatherDataContext.Provider value={{ weatherData, setWeatherDataFromPlaceName, setWeatherDataFromPosition }}>
+    <WeatherDataContext.Provider
+      value={{ weatherData, isLoading, setWeatherDataFromPlaceName, setWeatherDataFromPosition }}
+    >
       {children}
     </WeatherDataContext.Provider>
   );

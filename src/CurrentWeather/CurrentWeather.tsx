@@ -6,7 +6,7 @@ export default function CurrentWeather() {
   const { weatherData } = useWeatherData();
   const { placeName } = weatherData!;
   const { temperature, icon, description } = weatherData!.currentWeather;
-
+  console.log('currweather');
   return (
     <div className="current-weather">
       <FadeIn timeout={0}>

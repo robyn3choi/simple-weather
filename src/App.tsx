@@ -3,7 +3,11 @@ import WeatherReport from './WeatherReport/WeatherReport';
 import { useWeatherData } from './WeatherProvider';
 
 export default function App() {
-  const { weatherData } = useWeatherData();
+  const { weatherData, isLoading } = useWeatherData();
+
+  if (isLoading) {
+    return null;
+  }
 
   if (weatherData && weatherData.currentWeather && weatherData.forecast) {
     return <WeatherReport />;
@@ -13,6 +17,5 @@ export default function App() {
     return <Splash />;
   }
 
-  // TODO: return spinner instead of null
   return null;
 }
